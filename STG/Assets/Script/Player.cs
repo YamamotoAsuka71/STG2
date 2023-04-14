@@ -29,12 +29,9 @@ public class Player : MonoBehaviour
             Camera camera=Camera.main;//ここ理解できてない
             //touchWorldPositionに何かを格納？（ここも理解できてない）
             touchWorldPosition=camera.ScreenToWorldPoint(touchScreenPosition);
-        }
-
+       }       
         //プレイヤーが指定座標に移動（詳しくはわからない）
         player.transform.position=Vector3.MoveTowards(player.transform.position,touchWorldPosition
-    ,speed*Time.deltaTime*2);
-
-       
+        ,speed*Time.deltaTime*2);
     }
 }

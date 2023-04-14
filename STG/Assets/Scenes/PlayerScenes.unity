@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1110889121}
+  moveflg: 0
   speed: 5
 --- !u!4 &1816198241
 Transform:

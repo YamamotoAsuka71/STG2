@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public GameObject player;
     //マウスのクリックした座標の取得
     Vector3 touchWorldPosition;
-    
+
+    public bool moveflg;
     //移動のスピード？
     public int speed=5;
     // Start is called before the first frame update
@@ -29,9 +30,18 @@ public class Player : MonoBehaviour
             Camera camera=Camera.main;//ここ理解できてない
             //touchWorldPositionに何かを格納？（ここも理解できてない）
             touchWorldPosition=camera.ScreenToWorldPoint(touchScreenPosition);
-       }       
-        //プレイヤーが指定座標に移動（詳しくはわからない）
-        player.transform.position=Vector3.MoveTowards(player.transform.position,touchWorldPosition
-        ,speed*Time.deltaTime*2);
+            moveflg=true;
+       } 
+       if(moveflg==true)
+       {
+            //プレイヤーが指定座標に移動（詳しくはわからない）
+            player.transform.position=Vector3.MoveTowards(player.transform.position,touchWorldPosition
+            ,speed*Time.deltaTime*2);
+            if(player.transform.position==touchWorldPosition)
+            {
+                moveflg=false;
+            }
+            
+       }      
     }
 }

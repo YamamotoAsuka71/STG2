@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     void move()
     {
+        //クリックした地点までいかないと次のクリック反応しない時用
         //if(moveflg==false)
         //{
             if(Input.GetMouseButtonDown(0))//左クリックされたら起動
@@ -71,14 +72,19 @@ public class Player : MonoBehaviour
     }
     void bullet()
     {
+        //弾の発射間隔の計算
         bullettime+=Time.deltaTime;
+        //スペースキーで弾の発射
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            //弾を発射してから１秒以上たったら次の弾を発射
             if(bullettime>=1.0f)
             {
+                //bulletPrefabをプレイヤーの位置に生成
                 Instantiate(bulletPrefab,
                         this.transform.position,
                         transform.rotation);
+                //弾の発射間隔の時間リセット
                 bullettime=0.0f;
             }
         }

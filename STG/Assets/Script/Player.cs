@@ -5,17 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //プレイヤーが移動できるx軸の最大値
-    public float maxwidth=8.388f;
+    private float maxwidth=8.388f;
     //プレイヤーが移動できるx軸の最小値
-    public float minwidth=-8.388f;
+    private float minwidth=-8.388f;
     //プレイヤーが移動できるy軸の最大値
-    public float maxhigh=4.5f;
+    private float maxhigh=4.5f;
     //プレイヤーが移動できるy軸の最小値
-    public float minhigh=-4.5f;
-    //動かすプレイヤーのオブジェクト
-    public GameObject player;
+    private float minhigh=-4.5f;
+    //発射する弾のオブジェクト
+    public GameObject bulletPrefab;
     //マウスのクリックした座標の取得
     Vector3 touchWorldPosition;
+    //弾の発射間隔
+    private float bullettime=0f;
 
     public bool moveflg;
     //移動のスピード？
@@ -30,21 +32,26 @@ public class Player : MonoBehaviour
     void Update()
     {
         move();
+        bullet();
     }
 
     void move()
     {
-        if(Input.GetMouseButtonDown(0))//左クリックされたら起動
-        {
-            //マウスでクリックした座標の取得しtouchScreenPositionに格納
-            Vector3 touchScreenPosition=Input.mousePosition;
-            //プレイヤーの奥行きを5.0に固定
-            touchScreenPosition.z=5.0f;
-            Camera camera=Camera.main;//カメラの取得
-            //touchWorldPositionにスクリーンポジションをワールドポジションに変換して格納
-            touchWorldPosition=camera.ScreenToWorldPoint(touchScreenPosition);
-            moveflg=true;
-       } 
+        //if(moveflg==false)
+        //{
+            if(Input.GetMouseButtonDown(0))//左クリックされたら起動
+            {
+             //マウスでクリックした座標の取得しtouchScreenPositionに格納
+              Vector3 touchScreenPosition=Input.mousePosition;
+             //プレイヤーの奥行きを5.0に固定
+             touchScreenPosition.z=5.0f;
+              Camera camera=Camera.main;//カメラの取得
+              //touchWorldPositionにスクリーンポジションをワールドポジションに変換して格納
+             touchWorldPosition=camera.ScreenToWorldPoint(touchScreenPosition);
+             moveflg=true;
+            } 
+
+        //}
        if(moveflg==true)
        {
             //プレイヤーの行動範囲の制限
@@ -52,14 +59,28 @@ public class Player : MonoBehaviour
             touchWorldPosition.y<maxhigh&&touchWorldPosition.y>minhigh)
             {
                 //プレイヤーが指定座標に移動（詳しくはわからない）
-                player.transform.position=Vector3.MoveTowards(player.transform.position,touchWorldPosition
+                this.transform.position=Vector3.MoveTowards(this.transform.position,touchWorldPosition
                 ,speed*Time.deltaTime*2);
-                if(player.transform.position==touchWorldPosition)
+                if(this.transform.position==touchWorldPosition)
                 {
                     moveflg=false;
                 }            
             }            
        }      
         
+    }
+    void bullet()
+    {
+        bullettime+=Time.deltaTime;
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(bullettime>=1.0f)
+            {
+                Instantiate(bulletPrefab,
+                        this.transform.position,
+                        transform.rotation);
+                bullettime=0.0f;
+            }
+        }
     }
 }

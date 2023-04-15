@@ -6,6 +6,9 @@ public class EnemyController3 : MonoBehaviour
 {
     bool xyflg=false;//上下を切り替えるスイッチ（最初はオフ）。
     bool Destroyflg=false;
+    public GameObject LaunchPoint;
+    public GameObject EnemyBullet;
+    float BulletCount=0;
     void Start()
     {
         
@@ -22,6 +25,7 @@ public class EnemyController3 : MonoBehaviour
             MoveTrue();//左上に直進。
         }
         MoveDestroy();//エネミー３を破壊するまでの流れ。
+        Bullet();
     }
     void MoveFalse()
     {
@@ -50,7 +54,7 @@ public class EnemyController3 : MonoBehaviour
             pos.x -= 0.01f;//左へ移動。
             pos.y += 0.025f;//上へ移動。
         }
-        if(pos.y>4.5f)//一番下に到達したら。
+        if(pos.y>4.5f)//一番上に到達したら。
         {
             xyflg=false;//スイッチをオフ。
         }
@@ -70,10 +74,25 @@ public class EnemyController3 : MonoBehaviour
             pos.x -= 0.01f;
             pos.y -= 0.025f;
         }
-        if(pos.x<-8.888f)//見切れたら。
+        if(pos.x<-8.888f||pos.y<-5f)//見切れたら。
         {
             Destroy(this.gameObject);//エネミー３を破壊。
         }
         myTransform.position = pos;//オブジェクトの座標を更新。
+    }
+    void Bullet()
+    {
+        BulletCount+=Time.deltaTime;
+        if(BulletCount>=0.5f)
+        {
+            Transform PointTransform = LaunchPoint.transform;//オブジェクトの位置情報を取得。
+
+            Vector3 Bulletpos = PointTransform.position;//オブジェクトの座標を取得。
+            PointTransform.position=Bulletpos;//オブジェクトの座標を更新。
+            Instantiate(EnemyBullet, new Vector3(Bulletpos.x, Bulletpos.y, 0), Quaternion.identity);
+
+            BulletCount=0;
+        }
+        
     }
 }

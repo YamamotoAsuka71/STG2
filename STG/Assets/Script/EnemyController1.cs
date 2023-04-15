@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController1 : MonoBehaviour
 {
+    public GameObject LaunchPoint;
+    public GameObject EnemyBullet;
+    float BulletCount=0;
     void Start()
     {
         
@@ -13,6 +16,7 @@ public class EnemyController1 : MonoBehaviour
     {
         MoveX();//エネミー１の直進運動。
         MoveY();//エネミー１が上へはける挙動。
+        Bullet();
     }
     void MoveX()
     {
@@ -41,5 +45,20 @@ public class EnemyController1 : MonoBehaviour
             Destroy(this.gameObject);//エネミー１を破壊。
         }
         myTransform.position=pos;//オブジェクトの座標を更新。
+    }
+    void Bullet()
+    {
+        BulletCount+=Time.deltaTime;
+        if(BulletCount>=1)
+        {
+            Transform PointTransform = LaunchPoint.transform;//オブジェクトの位置情報を取得。
+
+            Vector3 Bulletpos = PointTransform.position;//オブジェクトの座標を取得。
+            PointTransform.position=Bulletpos;//オブジェクトの座標を更新。
+            Instantiate(EnemyBullet, new Vector3(Bulletpos.x, Bulletpos.y, 0), Quaternion.identity);
+
+            BulletCount=0;
+        }
+        
     }
 }

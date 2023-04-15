@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
             //プレイヤーの行動範囲の制限
             if(touchWorldPosition.x<maxwidth&&touchWorldPosition.x>minwidth&&
             touchWorldPosition.y<maxhigh&&touchWorldPosition.y>minhigh)
-            //{
+            {
                 //プレイヤーが指定座標に移動（詳しくはわからない）
                 player.transform.position=Vector3.MoveTowards(player.transform.position,touchWorldPosition
                 ,speed*Time.deltaTime*2);
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
                 {
                     moveflg=false;
                 }            
-            //}            
+            }            
        }      
         
     }

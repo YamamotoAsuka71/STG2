@@ -23,7 +23,7 @@ public class EnemyController1 : MonoBehaviour
         Transform myTransform = this.transform;//オブジェクトの位置情報を取得。
 
         Vector3 pos = myTransform.position;//オブジェクトの座標を取得。
-        if(pos.x>=-2.194f)//ある程度近づくまで。
+        if(pos.x>=-1.194f)//ある程度近づくまで。
         {
             pos.x -= 0.01f;//左へ直進。
         }
@@ -36,7 +36,7 @@ public class EnemyController1 : MonoBehaviour
         Transform myTransform=this.transform;//オブジェクトの位置情報を取得。
 
         Vector3 pos=myTransform.position;//オブジェクトの座標を取得。
-        if(pos.x<=-2.194f)//ある程度近づいたら。
+        if(pos.x<=-1.194f)//ある程度近づいたら。
         {
             pos.y+=0.01f;//上へはける。
         }

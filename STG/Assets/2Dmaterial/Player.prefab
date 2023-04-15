@@ -97,10 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af52780b368db341a6065b906758c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxwidth: 8.388
-  minwidth: -8.388
-  maxhigh: 4.5
-  minhigh: -4.5
-  player: {fileID: 5761515312938978707}
+  bulletPrefab: {fileID: 7921590428958803251, guid: 03d418be198b9b941b5f80db36cd891f, type: 3}
   moveflg: 0
   speed: 5

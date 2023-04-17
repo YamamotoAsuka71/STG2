@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissilSpeed : MonoBehaviour
+public class MissilMove : MonoBehaviour
 {
     private GameObject playerObject;
     private Vector3 PlayerPosition;

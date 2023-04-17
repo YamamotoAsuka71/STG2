@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     //プレイヤーが移動できるx軸の最大値
     private float maxwidth=8.388f;
@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     //プレイヤーが移動できるy軸の最小値
     private float minhigh=-4.5f;
     //発射する弾のオブジェクト
-    public GameObject bulletPrefab;
+    [SerializeField]
+    private GameObject bulletPrefab;
     //マウスのクリックした座標の取得
     Vector3 touchWorldPosition;
     //弾の発射間隔
@@ -31,7 +32,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //自機の動き
         move();
+        //弾の発射
         bullet();
     }
 
@@ -77,8 +80,8 @@ public class Player : MonoBehaviour
         //スペースキーで弾の発射
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //弾を発射してから１秒以上たったら次の弾を発射
-            if(bullettime>=1.0f)
+            //弾を発射してから0.5秒以上たったら次の弾を発射
+            if(bullettime>=0.5f)
             {
                 //bulletPrefabをプレイヤーの位置に生成
                 Instantiate(bulletPrefab,

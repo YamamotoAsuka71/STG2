@@ -27,30 +27,37 @@ public class MissilMove : MonoBehaviour
         Seconds3+=Time.deltaTime;
         PlayerPosition = playerObject.transform.position;
         EnemyPosition = transform.position;
+
+        Vector3 diff=(PlayerPosition-EnemyPosition).normalized;
+        //float diffX=PlayerPosition.x-EnemyPosition.x;
+        //float diffY=PlayerPosition.y-EnemyPosition.y;
+
         if(Seconds3<=5)
         {
+            this.transform.rotation=Quaternion.FromToRotation(Vector3.up,diff);
+
             //// 対象物へのベクトルを算出
             //Vector3 toDirection = playerObject.transform.position - transform.position;
             //// 対象物へ回転する
             //transform.rotation = Quaternion.FromToRotation(Vector3.up, toDirection);
 
             if (PlayerPosition.x > EnemyPosition.x&&PlayerPosition.y > EnemyPosition.y)
-            {
+            {   
                 EnemyPosition.x = EnemyPosition.x + 1f*Time.deltaTime;
                 EnemyPosition.y = EnemyPosition.y + 1f*Time.deltaTime;
             }
-            if (PlayerPosition.x < EnemyPosition.x&&PlayerPosition.y > EnemyPosition.y)
+            else if (PlayerPosition.x < EnemyPosition.x&&PlayerPosition.y > EnemyPosition.y)
             {
                 EnemyPosition.x = EnemyPosition.x - 1f*Time.deltaTime;
                 EnemyPosition.y = EnemyPosition.y + 1f*Time.deltaTime;
             }
 
-            if (PlayerPosition.x > EnemyPosition.x&&PlayerPosition.y < EnemyPosition.y)
+            else if (PlayerPosition.x > EnemyPosition.x&&PlayerPosition.y < EnemyPosition.y)
             {
                 EnemyPosition.x = EnemyPosition.x + 1f*Time.deltaTime;
                 EnemyPosition.y = EnemyPosition.y - 1f*Time.deltaTime;
             }
-            if (PlayerPosition.x < EnemyPosition.x&&PlayerPosition.y < EnemyPosition.y)
+            else if (PlayerPosition.x < EnemyPosition.x&&PlayerPosition.y < EnemyPosition.y)
             {
                 EnemyPosition.x = EnemyPosition.x - 1f*Time.deltaTime;
                 EnemyPosition.y = EnemyPosition.y - 1f*Time.deltaTime;

@@ -62,11 +62,13 @@ public class PlayerMove : MonoBehaviour
             if(touchWorldPosition.x<maxwidth&&touchWorldPosition.x>minwidth&&
             touchWorldPosition.y<maxhigh&&touchWorldPosition.y>minhigh)
             {
+                touchWorldPosition.z=0;
                 //プレイヤーが指定座標に移動（詳しくはわからない）
                 this.transform.position=Vector3.MoveTowards(this.transform.position,touchWorldPosition
                 ,speed*Time.deltaTime*2);
                 if(this.transform.position==touchWorldPosition)
                 {
+                    this.transform.position=new Vector3(this.transform.position.x,this.transform.position.y,0);
                     moveflg=false;
                 }            
             }            

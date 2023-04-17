@@ -54,12 +54,12 @@ public class MissileGenerator : MonoBehaviour
 
     void TopMove()
     {
-        Instantiate(Missile, new Vector3(0, 5.5f, 0), Quaternion.Euler(0, 0, 0));
+        Instantiate(Missile, new Vector3(0, 5.5f, 0), Quaternion.identity);
         Missile.SetActive (true);
     }
     void UnderMove()
     {
-        Instantiate(Missile, new Vector3(0, -5.5f, 0), Quaternion.Euler(0, 0, 0));
+        Instantiate(Missile, new Vector3(0, -5.5f, 0), Quaternion.identity);
         Missile.SetActive (true);
     }
     

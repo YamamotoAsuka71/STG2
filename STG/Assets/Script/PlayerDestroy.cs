@@ -28,11 +28,13 @@ public class PlayerDestroy : MonoBehaviour
         // もし衝突した相手オブジェクトのタグが"Enemy"ならば中の処理を実行
         if (other.gameObject.CompareTag("Enemy")) 
         {
+            Destroy(other.gameObject);
             LifeCount--;//ライフカウントを１減らす。
             Debug.Log(LifeCount);//残り残機を報告。
         }
         if (other.gameObject.CompareTag("EnemyBullet")) 
         {
+            Destroy(other.gameObject);
             LifeCount--;
             Debug.Log(LifeCount);
         }
